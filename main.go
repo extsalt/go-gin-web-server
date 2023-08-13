@@ -2,10 +2,7 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"runtime"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,12 +23,10 @@ func ConfigRuntime() {
 func StartGin() {
 	gin.SetMode(gin.ReleaseMode)
 
-	router := gin.New()
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	if err := router.Run(":" + port); err != nil {
-        log.Panicf("error: %s", err)
-	}
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
 }
