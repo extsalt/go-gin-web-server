@@ -29,4 +29,6 @@ func StartGin() {
 			"message": "pong",
 		})
 	})
+
+	r.Run()
 }
